@@ -46,6 +46,8 @@ def fill_db():
         cur = conn.cursor()
 
         for user in data:
+            # we're missing the country key despite the json schema mentioning it
+            # assumingit to be purposeful (since there's no reason to allocate space for a constantly null column
             values = (user["name"], user["picture"], user["company"], user["email"], user["phone"], user["latitude"], user["longitude"])
             cur.execute("INSERT INTO users(name, picture, company, email, phone, latitude, longitude) VALUES (?,?,?,?,?,?,?)", values)
 
